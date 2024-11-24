@@ -296,23 +296,35 @@ def register_routes(app):
             user = User.query.filter_by(username=form.username.data).first()  # Ensure to fetch the first user
             if not user:
                 # Handle the image upload
-                if form.picture.data:
+                if not form.picture.data:
+                    new_user = User(
+                    name=form.name.data,
+                    nickname=form.nickname.data,
+                    username=form.username.data,
+                    #picture=filename  # Save the filename in the database
+                    )
+                    db.session.add(new_user)
+                    db.session.commit()
+                    login_user(new_user)
+                    flash('User registered successfully.', 'success')
+                    return redirect(url_for('home'))
+                else:
                     # Generate a random string for the filename
                     random_string = secrets.token_hex(8)  # Generate a random string
                     filename = secure_filename(f"{random_string}_{form.picture.data.filename}")  # Secure the filename
                     form.picture.data.save(os.path.join('app/static/img/profile_pictures', filename))  # Save the image
 
-                new_user = User(
-                    name=form.name.data,
-                    nickname=form.nickname.data,
-                    username=form.username.data,
-                    picture=filename  # Save the filename in the database
-                )
-                db.session.add(new_user)
-                db.session.commit()
-                login_user(new_user)
-                flash('User registered successfully.', 'success')
-                return redirect(url_for('home'))
+                    new_user = User(
+                        name=form.name.data,
+                        nickname=form.nickname.data,
+                        username=form.username.data,
+                        picture=filename  # Save the filename in the database
+                    )
+                    db.session.add(new_user)
+                    db.session.commit()
+                    login_user(new_user)
+                    flash('User registered successfully.', 'success')
+                    return redirect(url_for('home'))
             flash(f"User {form.username.data} already exists")
             return redirect(url_for('login'))
         return render_template('nickname.html', title='Set Nickname', form=form)
