@@ -37,6 +37,9 @@
                                     <li class="nav-item"><a class="nav-link" href="{{url_for('match_week')}}">Match Week</a></li>
                                     <li class="nav-item"><a class="nav-link" href="{{url_for('fixtures')}}">Fixtures</a></li>
                                     <li class="nav-item"><a class="nav-link" href="{{url_for('results')}}">Results</a></li>
+                                {% endif %}
+                                    
+                                {% if current_user.id == 1 %}
                                     <li class="nav-item"><a class="nav-link" href="{{ url_for('get_user_predictions') }}">User Picks</a></li>
                                     <li class="nav-item"><a class="nav-link" href="{{ url_for('admin') }}">Admin Area</a></li>
                                 {% endif %}
