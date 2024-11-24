@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+
+
+
+
+
+{% block content %}
+
+
+    <div style="height: 100vh; padding-top: 70px;" class="row justify-content-center align-items-center">
+        <div style="width: 400px;">
+            <div class="login-container shadow-lg">
+                <h2 class="text-center mb-4">Select Match Week</h2>
+
+                <div class="divider"></div>
+
+                <div>
+                    {{ render_form(form, button_size='xl', button_style='primary w-100') }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

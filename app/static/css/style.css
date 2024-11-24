@@ -1,0 +1,164 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --dark-color: #1a2d3f;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: whitesmoke;
+}
+
+
+main {
+    flex: 1; /* Ensures main content takes up available space */
+}
+
+.navbar {
+    background-color: var(--dark-color);
+}
+
+
+.span-text-1 {
+    color: orangered;
+}
+
+
+.span-text-2 {
+    color: whitesmoke;
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: orangered;
+    transform: scale(1.1);
+}
+
+#login-btn:hover {
+    background-color: orangered;
+    transform: scale(1.1);
+}
+
+#logout-btn:hover {
+    background-color: orangered;
+    transform: scale(1.1);
+}
+
+
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 70px;
+    margin-bottom: 50px;
+}
+
+
+.content-wrapper {
+    flex: 1 0 auto;
+}
+
+
+/* Footer styling */
+.footer {
+    background-color: var(--dark-color); /* Light gray background */
+    padding: 20px 0; /* Padding for a clean look */
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for effect */
+}
+
+
+.footer p {
+    color: white;
+}
+
+/* HOME HERO BUTTON */
+.hero-section {
+    background: url('/app/static/img/Premier-League-Logo-Minimalistic-Wallpaper.png') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+}
+
+#get-started:hover {
+    background-color: orangered;
+    transform: scale(1.1);
+}
+
+.form-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+
+/* LOGIN BUTTON */
+
+.login-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid #dadce0;
+    color: #5f6368;
+}
+
+.google-btn:hover {
+    background-color: rgba(255, 166, 0, 0.397);
+    color: #5f6368;
+}
+
+.google-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.divider:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.divider:not(:empty)::after {
+    margin-left: .25em;
+}
+
+#bulk-users:hover {
+    background-color: orangered;
+    transform: scale(1.1);
+}
+
+
+

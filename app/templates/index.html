@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+
+
+
+
+
+{% block content %}
+
+<!-- Hero Section -->
+<section style="height: 100vh; " class="hero-section d-flex justify-content-center align-items-center">
+    <div  class="container text-center">
+        <h1 class="display-4 fw-bold mb-4">Pundits EPL Prediction Game</h1>
+        <p class="lead mb-5">Connect with fellow pundits and beat them to the price.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a id="get-started" href="{{ url_for('login') }}" class="btn btn-primary btn-lg rounded-pill">Get Started</a>
+            <a href="#" class="btn btn-light btn-lg">Learn More</a>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}

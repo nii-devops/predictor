@@ -1,0 +1,66 @@
+
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+
+
+
+
+
+{% block content %}
+
+    <div style="height: 100vh; padding-top: 70px;" class="row justify-content-center align-items-center">
+        <div style="width: 600px;">
+            <div class="form-container shadow-lg">
+                <h2 class="text-center mb-4">User Profile</h2>
+
+                <hr class="mb-3 mt-3">
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div style="width: 160px;" class="col-md-4 justify-content-center align-items-center mt-3">
+                            {% if user.picture %}
+                                <img src="{{ url_for('static', filename='img/profile_pictures/' ~ user.picture) }}" class="img-fluid rounded-start justify-content-center align-items-center" alt="User Profile Picture">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='img/profile_pictures/profile_pic.jpg') }}" class="img-fluid rounded-start justify-content-center align-items-center" alt="User Profile Picture">
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ user.nickname }} | <small class="text-muted">{{ user.username }}</small></h5>
+                                
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p class="card-text text-center">Total points</p>
+                                        <h1 style="font-size: 3.5em;">{{ points }}</h1>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="card-text text-center">Position</p>
+                                        <h1 style="font-size: 3.5em;">{{ position }}</h1>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="justify-content-center align-items-center text-center mb-3">
+                        <a class="btn btn-sm btn-outline-primary rounded-3" href="http://">Set password</a>
+                        <a class="btn btn-sm btn-outline-info rounded-3" href="http://">Edit Profile</a>
+                    </div>
+                </div>  
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
