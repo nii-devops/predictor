@@ -36,3 +36,4 @@ htmlcov/
 
 # Python scripts
 test.py
+app.py
