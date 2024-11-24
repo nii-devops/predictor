@@ -45,7 +45,11 @@
                                     </div>
                                     <div class="col-md-6">
                                         <p class="card-text text-center">Position</p>
-                                        <h1 style="font-size: 3.5em;">{{ position }}</h1>
+                                        {% if points == 0 %}
+                                            <h1 style="font-size: 3.5em;">N/A</h1>
+                                        {% else %}
+                                            <h1 style="font-size: 3.5em;">{{ position }}</h1>
+                                        {% endif points == 0 %}
                                     </div>
                                 </div>
 
