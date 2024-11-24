@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash, session, request
 from flask_login import login_user, logout_user, current_user, login_required
 from app import db, oauth, login_manager
 from app.forms import (LoginForm, RegisterForm, NickNameForm, SelectWeekForm, FixtureForm, PredictionForm,
-                       UserPredictionForm, EditUserForm, PasswordForm)
+                       UserPredictionForm, EditUserForm, PasswordForm, UserEmailForm)
 from app.models import *
 import os
 from datetime import datetime, timedelta
@@ -151,6 +151,7 @@ def register_routes(app):
 
     import secrets
 
+    """
     @app.route('/login/google')
     def google_login():
         try:
@@ -161,6 +162,22 @@ def register_routes(app):
         except Exception as e:
             app.logger.error(f"Login Error: {str(e)}")
             return "Error occurred during login!"
+
+    """
+
+    @app.route('/login/google')
+    def google_login():
+        try:
+            # Generate a nonce and store it in the session
+            session['nonce'] = secrets.token_urlsafe(16)
+            #redirect_uri = url_for('authorize_google', _external=True)
+            redirect_uri = os.getenv('REDIRECT_URI', _external=True)
+            return google.authorize_redirect(redirect_uri)
+        except Exception as e:
+            app.logger.error(f"Login Error: {str(e)}")
+            return "Error occurred during login!"
+
+
 
 
     """
@@ -398,6 +415,7 @@ def register_routes(app):
 
 
     @app.route('/fixture', methods=['GET', 'POST'])
+    @login_required
     def fixtures():
         form = FixtureForm()
         
@@ -415,8 +433,8 @@ def register_routes(app):
                 flash("Invalid week selection!", category='warning')
                 return render_template('fixtures.html', title='Home', form=form)
 
-            valid_teams = ['ARS', 'AST', 'BOU', 'BRE', 'BRI', 'CHE', 'CRY', 'EVE', 'FUL', 'IPS',
-                'LEI', 'LIV', 'MNC', 'MNU', 'NEW', 'NFO', 'SOU', 'TOT', 'WES', 'WOL']  # Define your list of valid teams here
+            # valid_teams = ['ARS', 'AST', 'BOU', 'BRE', 'BRI', 'CHE', 'CRY', 'EVE', 'FUL', 'IPS',
+            #     'LEI', 'LIV', 'MNC', 'MNU', 'NEW', 'NFO', 'SOU', 'TOT', 'WES', 'WOL']  # Define your list of valid teams here
 
             # Validate that home and away teams are in the valid_teams list
             for i in range(1,11):
