@@ -28,7 +28,7 @@
                             {% if user.picture %}
                                 <img src="{{ url_for('static', filename='img/profile_pictures/' ~ user.picture) }}" class="img-fluid rounded-start justify-content-center align-items-center" alt="User Profile Picture">
                             {% else %}
-                                <img src="{{ url_for('static', filename='img/profile_pictures/profile_pic.jpg') }}" class="img-fluid rounded-start justify-content-center align-items-center" alt="User Profile Picture">
+                                <img src="{{ url_for('static', filename='img/profile_pictures/' ~ profile_pic.jpg') }}" class="img-fluid rounded-start justify-content-center align-items-center" alt="User Profile Picture">
                             {% endif %}
                         </div>
 
