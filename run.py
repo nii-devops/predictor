@@ -6,7 +6,8 @@ def lambda_handler(event, context):
     app = create_app()
     return (app,
             event,
-            context)
+            context,
+            )
 
 
 
