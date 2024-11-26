@@ -20,6 +20,10 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f'<User {self.username}>'
 
+    # Establishing relationships
+    predictions = db.relationship('Prediction', back_populates='user')
+    scores = db.relationship('Score', back_populates='user')
+
 
 # Week Model
 class Week(db.Model):
@@ -27,6 +31,11 @@ class Week(db.Model):
     id          = db.Column(db.Integer, primary_key=True)
     week_number = db.Column(db.Integer, unique=True, nullable=False)
     
+    # Establishing relationships
+    fixtures = db.relationship('Fixture', back_populates='week')
+    predictions = db.relationship('Prediction', back_populates='week')
+    results = db.relationship('Result', back_populates='week')
+    scores = db.relationship('Score', back_populates='week')
 
 
 # Fixture Model
@@ -37,7 +46,7 @@ class Fixture(db.Model):
     matches     = db.Column(db.JSON, nullable=False)
     
     # Establishing relationships
-    week        = db.relationship('Week', backref='fixture')
+    week        = db.relationship('Week', back_populates='fixtures')
 
 
 
@@ -50,8 +59,8 @@ class Prediction(db.Model):
     user_predictions    = db.Column(db.JSON, nullable=False)
     
     # Establishing relationships
-    user                = db.relationship('User', backref='prediction')
-    week                = db.relationship('Week', backref='prediction')
+    user                = db.relationship('User', back_populates='predictions')
+    week                = db.relationship('Week', back_populates='predictions')
 
 
 
@@ -63,7 +72,7 @@ class Result(db.Model):
     results = db.Column(db.JSON, nullable=False)
     
     # Establishing relationships
-    week    = db.relationship('Week', backref='result')
+    week    = db.relationship('Week', back_populates='results')
 
 
 
@@ -76,8 +85,8 @@ class Score(db.Model):
     points      = db.Column(db.Integer, default=0)
 
     # Relationships
-    user        = db.relationship('User', backref='score')
-    week        = db.relationship('Week', backref='score')
+    user        = db.relationship('User', back_populates='scores')
+    week        = db.relationship('Week', back_populates='scores')
 
 
 # Score Model

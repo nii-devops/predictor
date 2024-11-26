@@ -170,8 +170,8 @@ def register_routes(app):
         try:
             # Generate a nonce and store it in the session
             session['nonce'] = secrets.token_urlsafe(16)
-            #redirect_uri = url_for('authorize_google', _external=True)
-            redirect_uri = os.getenv('REDIRECT_URI')
+            redirect_uri = url_for('authorize_google', _external=True)
+            #redirect_uri = os.getenv('REDIRECT_URI')
             return google.authorize_redirect(redirect_uri)
         except Exception as e:
             app.logger.error(f"Login Error: {str(e)}")
@@ -434,7 +434,6 @@ def register_routes(app):
         weeks = Week.query.order_by(Week.week_number).all()  # Retrieve week numbers
         if weeks:
             form.game_week.data = max(week.week_number for week in weeks)
-        #form.game_week.choices = [(week.week_number, f"Week {week.week_number}") for week in weeks]
 
         if form.validate_on_submit():  # Check if the form is submitted and valid
             week = form.game_week.data
@@ -445,11 +444,13 @@ def register_routes(app):
                 flash("Invalid week selection!", category='warning')
                 return render_template('fixtures.html', title='Home', form=form)
 
-            # valid_teams = ['ARS', 'AST', 'BOU', 'BRE', 'BRI', 'CHE', 'CRY', 'EVE', 'FUL', 'IPS',
-            #     'LEI', 'LIV', 'MNC', 'MNU', 'NEW', 'NFO', 'SOU', 'TOT', 'WES', 'WOL']  # Define your list of valid teams here
+            # Check if the week exists
+            if not Week.query.filter_by(week_number=week).first():
+                flash(f'Week {week} does not exist! Please create it first.', 'warning')
+                return redirect(url_for('match_week'))  # Redirect to create week
 
-            # Validate that home and away teams are in the valid_teams list
-            for i in range(1,11):
+            # Validate that home and away teams are in the teams_names list
+            for i in range(1, 11):
                 if form[f'home_{i}'].data not in teams_names.values() or form[f'away_{i}'].data not in teams_names.values():
                     flash(f"Invalid team selection for match {i}!", category='warning')
                     return render_template('fixtures.html', title='Home', form=form)

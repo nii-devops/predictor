@@ -3,8 +3,6 @@ from wtforms import StringField, EmailField, PasswordField, SubmitField, Integer
 from wtforms.validators import DataRequired, EqualTo, Email, ValidationError
 
 
-
-
 teams = ['ARS', 'AST', 'BOU', 'BRE', 'BRI', 'CHE', 'CRY', 'EVE', 'FUL', 'IPS',
          'LEI', 'LIV', 'MNC', 'MNU', 'NEW', 'NFO', 'SOU', 'TOT', 'WES', 'WOL']
 
@@ -35,8 +33,6 @@ epl_teams = (
     ('West Ham', "WES"), 
     ('Wolves', "WOL")
 )
-
-
 
 
 
