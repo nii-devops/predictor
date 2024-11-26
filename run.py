@@ -1,7 +1,20 @@
 from app import create_app, db
+import json
 
 
-app = create_app()
+def lambda_handler(event, context):
+    app = create_app()
+    return (app,
+            event,
+            context)
+
+
+
+
+
+
+
+
 
 
 # # RUNNING ON LOCALHOST
