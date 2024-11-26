@@ -1,28 +1,17 @@
 from app import create_app, db
 import json
+from mangum import Mangum
 
+app = create_app()
+handler = Mangum(app)
 
 def lambda_handler(event, context):
-    app = create_app()
-    return (app,
-            event,
-            context,
-            )
-
-
-
-
-
-
-
-
+    return handler(event, context)
 
 
 # # RUNNING ON LOCALHOST
 # if __name__ == '__main__':
 #     app.run(debug=True)
-
-
 
 
 
